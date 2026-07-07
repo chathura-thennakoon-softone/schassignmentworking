@@ -1,22 +1,19 @@
 namespace SCH.Repositories.Students
 {
-    using AutoMapper;
     using Microsoft.Data.SqlClient;
     using Microsoft.EntityFrameworkCore;
     using SCH.Models.Common.GridEntities;
     using SCH.Models.Students.ClientDtos;
     using SCH.Models.Students.DbDtos;
     using SCH.Models.Students.Entities;
+    using SCH.Models.StudentCourseMap.Entities;
     using SCH.Repositories.Common;
     using SCH.Repositories.DbContexts;
 
     public class StudentsRepository : BaseRepository<Student, SCHContext>, IStudentsRepository
     {
-        private readonly IMapper mapper;
-
-        public StudentsRepository(SCHContext context, IMapper mapper) : base(context)
+        public StudentsRepository(SCHContext context) : base(context)
         {
-            this.mapper = mapper;
         }
 
         public async Task<List<Student>> GetStudentsAsync(bool? isActive)
@@ -130,7 +127,20 @@ namespace SCH.Repositories.Students
                     parameters)
                 .ToListAsync();
 
-            List<Student> students = mapper.Map<List<Student>>(rows);
+            List<Student> students = rows.Select(r => new Student
+            {
+                Id = r.Id,
+                FirstName = r.FirstName,
+                LastName = r.LastName,
+                Email = r.Email,
+                PhoneNumber = r.PhoneNumber,
+                SSN = r.SSN,
+                Image = r.Image,
+                StartDate = r.StartDate,
+                IsActive = r.IsActive,
+                RowVersion = r.RowVersion,
+                StudentCourseMaps = new List<StudentCourseMap>()
+            }).ToList();
 
             return new PagedResult<Student>
             {

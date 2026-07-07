@@ -1,6 +1,5 @@
 namespace SCH.Services.Students
 {
-    using AutoMapper;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using SCH.Models.Auth.Constants;
@@ -11,6 +10,8 @@ namespace SCH.Services.Students
     using SCH.Models.StudentCourseMap.Entities;
     using SCH.Models.Students.ClientDtos;
     using SCH.Models.Students.Entities;
+    using SCH.Models.Users.ClientDtos;
+    using SCH.Models.Users.Entities;
     using SCH.Repositories.Courses;
     using SCH.Repositories.StudentCourseMap;
     using SCH.Repositories.Students;
@@ -26,7 +27,6 @@ namespace SCH.Services.Students
         private readonly IStudentCourseMapRepository studentCourseMapRepository;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IAuthService authService;
-        private readonly IMapper mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
 
@@ -37,7 +37,6 @@ namespace SCH.Services.Students
             IStudentCourseMapRepository studentCourseMapRepository,
             UserManager<ApplicationUser> userManager,
             IAuthService authService,
-            IMapper mapper,
             IHttpContextAccessor httpContextAccessor) 
         { 
             this.unitOfWork = unitOfWork;
@@ -46,7 +45,6 @@ namespace SCH.Services.Students
             this.studentCourseMapRepository = studentCourseMapRepository;
             this.userManager = userManager;
             this.authService = authService;
-            this.mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
         }
 
@@ -55,7 +53,7 @@ namespace SCH.Services.Students
             List<Student> students = await studentsRepository
                 .GetStudentsAsync(isActive);
 
-            return mapper.Map<List<StudentDto>>(students);
+            return students.Select(MapStudentToDto).ToList();
         }
 
         public async Task<StudentDto?> GetStudentAsync(int id)
@@ -67,7 +65,7 @@ namespace SCH.Services.Students
                 return null;
             }
 
-            return mapper.Map<StudentDto>(student);
+            return MapStudentToDto(student);
         }
 
         public async Task<int> InsertStudentAsync(StudentDto student)
@@ -201,7 +199,7 @@ namespace SCH.Services.Students
             List<StudentCourseMap> courses = await studentCourseMapRepository
                 .GetStudentCourseMapsByStudentAsync(id);
 
-            return mapper.Map<List<StudentCourseMapDto>>(courses);
+            return courses.Select(MapStudentCourseMapToDto).ToList();
         }
 
         public async Task InsertCourseAsync(StudentCourseMapDto studentCourseMap)
@@ -260,7 +258,7 @@ namespace SCH.Services.Students
 
             return new PagedResult<StudentDto>
             {
-                Items      = mapper.Map<List<StudentDto>>(result.Items),
+                Items      = result.Items.Select(MapStudentToDto).ToList(),
                 TotalCount = result.TotalCount,
                 PageNumber = result.PageNumber,
                 PageSize   = result.PageSize,
@@ -305,5 +303,38 @@ namespace SCH.Services.Students
             }
 
         }
+
+        private static StudentDto MapStudentToDto(Student s) => new StudentDto
+        {
+            Id = s.Id,
+            FirstName = s.FirstName,
+            LastName = s.LastName,
+            Email = s.Email,
+            PhoneNumber = s.PhoneNumber,
+            SSN = s.SSN,
+            Image = s.Image,
+            StartDate = s.StartDate,
+            IsActive = s.IsActive,
+            UserId = s.UserId,
+            RowVersion = s.RowVersion,
+            User = s.User == null ? null : new UserDomainDto
+            {
+                Id = s.User.Id,
+                FirstName = s.User.FirstName,
+                LastName = s.User.LastName,
+                FullName = s.User.FullName
+            },
+            Courses = s.StudentCourseMaps.Select(MapStudentCourseMapToDto).ToList()
+        };
+
+        private static StudentCourseMapDto MapStudentCourseMapToDto(StudentCourseMap scm) => new StudentCourseMapDto
+        {
+            StudentId = scm.StudentId,
+            CourseId = scm.CourseId,
+            EnrollmentDate = scm.EnrollmentDate,
+            CourseName = scm.Course?.Name,
+            StudentFirstName = scm.Student?.FirstName,
+            StudentLastName = scm.Student?.LastName
+        };
     }
 }

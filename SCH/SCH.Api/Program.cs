@@ -20,7 +20,6 @@ builder.Services.AddHttpContextServices();
 builder.Services.ConfigureControllersWithFilters(); // Includes ModelValidationFilter
 builder.Services.AddServices();
 builder.Services.AddRepositories();
-builder.Services.AddMappings();
 
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 // Register both contexts (same database, different schemas)

@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SCH.Mappings\SCH.Mappings.csproj" />
+
     <ProjectReference Include="..\SCH.Repositories\SCH.Repositories.csproj" />
     <ProjectReference Include="..\SCH.Shared\SCH.Shared.csproj" />
   </ItemGroup>

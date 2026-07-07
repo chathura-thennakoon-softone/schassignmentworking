@@ -1,12 +1,13 @@
 namespace SCH.Services.Teachers
 {
-    using AutoMapper;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using SCH.Models.Auth.Constants;
     using SCH.Models.Auth.Entities;
     using SCH.Models.Teachers.ClientDtos;
     using SCH.Models.Teachers.Entities;
+    using SCH.Models.Users.ClientDtos;
+    using SCH.Models.Users.Entities;
     using SCH.Repositories.Teachers;
     using SCH.Repositories.UnitOfWork;
     using SCH.Services.Auth;
@@ -18,7 +19,6 @@ namespace SCH.Services.Teachers
         private readonly ITeachersRepository teachersRepository;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IAuthService authService;
-        private readonly IMapper mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public TeachersService(
@@ -26,14 +26,12 @@ namespace SCH.Services.Teachers
             ITeachersRepository teachersRepository,
             UserManager<ApplicationUser> userManager,
             IAuthService authService,
-            IMapper mapper,
             IHttpContextAccessor httpContextAccessor)
         {
             this.unitOfWork = unitOfWork;
             this.teachersRepository = teachersRepository;
             this.userManager = userManager;
             this.authService = authService;
-            this.mapper = mapper;
             this._httpContextAccessor = httpContextAccessor;
         }
 
@@ -42,13 +40,13 @@ namespace SCH.Services.Teachers
             List<Teacher> teachers = await teachersRepository
                 .GetTeachersAsync();
 
-            return mapper.Map<List<TeacherDto>>(teachers);
+            return teachers.Select(MapToDto).ToList();
         }
 
         public async Task<TeacherDto?> GetTeacherAsync(int id)
         {
             Teacher? teacher = await teachersRepository.GetTeacherAsync(id);
-            return teacher == null ? null : mapper.Map<TeacherDto>(teacher);
+            return teacher == null ? null : MapToDto(teacher);
         }
 
         public async Task<int> InsertTeacherAsync(TeacherDto teacher)
@@ -139,6 +137,21 @@ namespace SCH.Services.Teachers
             }
 
         }
+
+        private static TeacherDto MapToDto(Teacher t) => new TeacherDto
+        {
+            Id = t.Id,
+            Name = t.Name,
+            UserId = t.UserId,
+            RowVersion = t.RowVersion,
+            User = t.User == null ? null : new UserDomainDto
+            {
+                Id = t.User.Id,
+                FirstName = t.User.FirstName,
+                LastName = t.User.LastName,
+                FullName = t.User.FullName
+            }
+        };
     }
 }
 
