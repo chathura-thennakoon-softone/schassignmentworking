@@ -1,7 +1,5 @@
 namespace SCH.Repositories.Students
 {
-    using SCH.Models.Common.GridEntities;
-    using SCH.Models.Students.ClientDtos;
     using SCH.Models.Students.Entities;
 
     public interface IStudentsRepository
@@ -20,7 +18,5 @@ namespace SCH.Repositories.Students
         void UpdateAsync(Student student);
 
         Task DeleteStudentAsync(int id);
-
-        Task<PagedResult<Student>> GetStudentGridAsync(StudentGridRequest request);
     }
 }

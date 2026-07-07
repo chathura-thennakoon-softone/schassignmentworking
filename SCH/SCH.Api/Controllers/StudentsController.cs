@@ -9,7 +9,6 @@ namespace SCH.API.Controllers
     using SCH.Services.Students;
     using SCH.Shared.Exceptions;
     using System;
-    using SCH.Models.Common.GridEntities;
     using SCH.Models.Auth.Constants;
 
     [Route("api/[controller]")]
@@ -22,17 +21,6 @@ namespace SCH.API.Controllers
         public StudentsController(IStudentsService studentsService) 
         {
             this.studentsService = studentsService;     
-        }
-
-        // GET: api/students/grid
-        [HttpGet("grid")]
-        [Authorize(Policy = Policy.ViewStudents)]
-        public async Task<IActionResult> GetStudentGridAsync(
-            [FromQuery] StudentGridRequest request)
-        {
-            PagedResult<StudentDto> result = await studentsService
-                .GetStudentGridAsync(request);
-            return Ok(result);
         }
 
         // GET: api/<StudentsController>

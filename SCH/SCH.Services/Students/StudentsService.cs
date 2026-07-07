@@ -4,12 +4,11 @@ namespace SCH.Services.Students
     using Microsoft.AspNetCore.Identity;
     using SCH.Models.Auth.Constants;
     using SCH.Models.Auth.Entities;
-    using SCH.Models.Common.GridEntities;
-    using SCH.Models.Courses.Entities;
     using SCH.Models.StudentCourseMap.ClientDtos;
     using SCH.Models.StudentCourseMap.Entities;
     using SCH.Models.Students.ClientDtos;
     using SCH.Models.Students.Entities;
+    using SCH.Models.Courses.Entities;
     using SCH.Models.Users.ClientDtos;
     using SCH.Models.Users.Entities;
     using SCH.Repositories.Courses;
@@ -251,20 +250,6 @@ namespace SCH.Services.Students
             await unitOfWork.SaveChangesAsync();
         }
 
-        public async Task<PagedResult<StudentDto>> GetStudentGridAsync(StudentGridRequest request)
-        {
-            PagedResult<Student> result = await studentsRepository
-                .GetStudentGridAsync(request);
-
-            return new PagedResult<StudentDto>
-            {
-                Items      = result.Items.Select(MapStudentToDto).ToList(),
-                TotalCount = result.TotalCount,
-                PageNumber = result.PageNumber,
-                PageSize   = result.PageSize,
-            };
-        }
-
         private async Task ValidateCourses(StudentDto student)
         {
             if (student.Courses.Count > 0)
@@ -324,7 +309,7 @@ namespace SCH.Services.Students
                 LastName = s.User.LastName,
                 FullName = s.User.FullName
             },
-            Courses = s.StudentCourseMaps.Select(MapStudentCourseMapToDto).ToList()
+            Courses = s.StudentCourseMaps?.Select(MapStudentCourseMapToDto).ToList() ?? []
         };
 
         private static StudentCourseMapDto MapStudentCourseMapToDto(StudentCourseMap scm) => new StudentCourseMapDto
