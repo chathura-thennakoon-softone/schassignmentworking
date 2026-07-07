@@ -5,7 +5,7 @@ namespace SCH.Services.Auth
     /// <summary>
     /// Service for generating and validating JWT tokens
     /// </summary>
-    public interface ITokenService : IService
+    public interface ITokenService
     {
         /// <summary>
         /// Generates a JWT access token

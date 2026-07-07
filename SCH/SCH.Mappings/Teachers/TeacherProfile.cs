@@ -4,7 +4,7 @@ namespace SCH.Mappings.Teachers
     using SCH.Models.Teachers.ClientDtos;
     using SCH.Models.Teachers.Entities;
 
-    public class TeacherProfile : Profile, IProfile
+    public class TeacherProfile : Profile
     {
         public TeacherProfile()
         {

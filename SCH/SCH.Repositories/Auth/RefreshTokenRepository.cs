@@ -7,7 +7,7 @@ namespace SCH.Repositories.Auth
     /// <summary>
     /// Repository implementation for RefreshToken entity
     /// </summary>
-    internal class RefreshTokenRepository : IRefreshTokenRepository
+    public class RefreshTokenRepository : IRefreshTokenRepository
     {
         private readonly IdentityContext _context;
 

@@ -9,7 +9,7 @@ namespace SCH.Repositories.UnitOfWork
     /// Provides common transaction management and delegates audit tracking to derived classes
     /// </summary>
     /// <typeparam name="TContext">The DbContext type</typeparam>
-    internal abstract class BaseUnitOfWork<TContext> : IUnitOfWork
+    public abstract class BaseUnitOfWork<TContext> : IUnitOfWork
         where TContext : DbContext
     {
         protected readonly TContext Context;

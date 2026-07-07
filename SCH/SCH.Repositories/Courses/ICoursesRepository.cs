@@ -2,7 +2,7 @@ namespace SCH.Repositories.Courses
 {
     using SCH.Models.Courses.Entities;
 
-    public interface ICoursesRepository: IRepository
+    public interface ICoursesRepository
     {
         Task<List<Course>> GetCoursesAsync();
 

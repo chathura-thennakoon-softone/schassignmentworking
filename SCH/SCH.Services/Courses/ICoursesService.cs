@@ -2,7 +2,7 @@
 {
     using SCH.Models.Courses.ClientDtos;
 
-    public interface ICoursesService: IService
+    public interface ICoursesService
     {
         Task<List<CourseDto>> GetCoursesAsync();
 

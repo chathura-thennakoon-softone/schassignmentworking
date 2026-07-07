@@ -6,7 +6,7 @@ namespace SCH.Services.Auth
     /// <summary>
     /// Service for authentication and authorization operations
     /// </summary>
-    public interface IAuthService : IService
+    public interface IAuthService
     {
         /// <summary>
         /// Authenticates a user and generates tokens

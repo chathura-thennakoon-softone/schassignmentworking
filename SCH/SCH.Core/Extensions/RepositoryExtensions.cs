@@ -1,8 +1,13 @@
 namespace SCH.Core.Extensions
 {
     using Microsoft.Extensions.DependencyInjection;
-    using SCH.Repositories;
-    using System.Reflection;
+    using SCH.Repositories.Auth;
+    using SCH.Repositories.Courses;
+    using SCH.Repositories.IdentityUsers;
+    using SCH.Repositories.StudentCourseMap;
+    using SCH.Repositories.Students;
+    using SCH.Repositories.Teachers;
+    using SCH.Repositories.Users;
 
     /// <summary>
     /// Extension methods for configuring repository services
@@ -10,30 +15,18 @@ namespace SCH.Core.Extensions
     public static class RepositoryExtensions
     {
         /// <summary>
-        /// Automatically registers all repository implementations from SCH.Repositories assembly
+        /// Registers all repository implementations
         /// </summary>
         /// <param name="services">Service collection</param>
         public static void AddRepositories(this IServiceCollection services)
         {
-            Assembly assembly = Assembly.Load("SCH.Repositories");
-
-            Type superInterfaceType = typeof(IRepository);
-
-            IEnumerable<Type> types = assembly.GetTypes()
-                .Where(t => 
-                    superInterfaceType.IsAssignableFrom(t) 
-                    && !t.IsInterface 
-                    && !t.IsAbstract);
-
-            foreach (Type type in types)
-            {
-                Type parentInteface = type.GetInterfaces()
-                    .Single(i => 
-                        i.GetInterfaces()
-                        .Any(ip => ip == superInterfaceType));
-
-                services.AddScoped(parentInteface, type);
-            }
+            services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IStudentsRepository, StudentsRepository>();
+            services.AddScoped<IIdentityUsersRepository, IdentityUsersRepository>();
+            services.AddScoped<ICoursesRepository, CoursesRepository>();
+            services.AddScoped<ITeachersRepository, TeachersRepository>();
+            services.AddScoped<IStudentCourseMapRepository, StudentCourseMapRepository>();
         }
     }
 }

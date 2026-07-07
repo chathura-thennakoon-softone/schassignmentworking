@@ -7,7 +7,7 @@ namespace SCH.Repositories.Users
     /// <summary>
     /// Repository implementation for User entity (domain user table)
     /// </summary>
-    internal class UserRepository : IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly SCHContext _context;
 

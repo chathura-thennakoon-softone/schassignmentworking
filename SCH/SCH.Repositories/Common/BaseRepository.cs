@@ -7,7 +7,7 @@ namespace SCH.Repositories.Common
     /// Base repository with common data access patterns
     /// Provides generic concurrency control support
     /// </summary>
-    internal abstract class BaseRepository<TEntity, TContext> 
+    public abstract class BaseRepository<TEntity, TContext> 
         where TEntity : class, IConcurrencyEntity
         where TContext : DbContext
     {

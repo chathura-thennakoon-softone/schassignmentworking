@@ -6,7 +6,7 @@
     using SCH.Shared.Exceptions;
     using System;
 
-    internal class ImageService : IImageService
+    public class ImageService : IImageService
     {
         private readonly IConfiguration configuration;
 

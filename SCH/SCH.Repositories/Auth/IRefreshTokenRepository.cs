@@ -5,7 +5,7 @@ namespace SCH.Repositories.Auth
     /// <summary>
     /// Repository interface for RefreshToken entity
     /// </summary>
-    public interface IRefreshTokenRepository : IRepository
+    public interface IRefreshTokenRepository
     {
         /// <summary>
         /// Gets a refresh token by token string (includes User navigation property)

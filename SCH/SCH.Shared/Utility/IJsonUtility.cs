@@ -1,6 +1,6 @@
 ﻿namespace SCH.Shared.Utility
 {
-    public interface IJsonUtility : IUtility
+    public interface IJsonUtility
     {
         string Serialize<T>(T obj);
 

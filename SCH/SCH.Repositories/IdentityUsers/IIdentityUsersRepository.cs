@@ -5,7 +5,7 @@ namespace SCH.Repositories.IdentityUsers
     /// <summary>
     /// Repository interface for identity user queries
     /// </summary>
-    public interface IIdentityUsersRepository : IRepository
+    public interface IIdentityUsersRepository
     {
         /// <summary>
         /// Gets users that have only the Basic role assigned (no Admin, Teacher, or Student roles)

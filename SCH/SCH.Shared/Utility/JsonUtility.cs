@@ -2,7 +2,7 @@
 {
     using Newtonsoft.Json;
 
-    internal class JsonUtility: IJsonUtility
+    public class JsonUtility: IJsonUtility
     {
 
         string IJsonUtility.Serialize<T>(T obj)

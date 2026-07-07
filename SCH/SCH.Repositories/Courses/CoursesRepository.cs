@@ -6,7 +6,7 @@ namespace SCH.Repositories.Courses
     using SCH.Repositories.DbContexts;
     using System.Collections.Generic;
 
-    internal class CoursesRepository : BaseRepository<Course, SCHContext>, ICoursesRepository
+    public class CoursesRepository : BaseRepository<Course, SCHContext>, ICoursesRepository
     {
         public CoursesRepository(SCHContext context) : base(context)
         {

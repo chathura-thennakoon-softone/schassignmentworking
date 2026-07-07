@@ -2,7 +2,7 @@
 {
     using SCH.Models.Users.ClientDtos;
 
-    public interface IIdentityUsersService : IService
+    public interface IIdentityUsersService
     {
         Task<List<UserDomainDto>> GetBasicOnlyUsersAsync();
     }

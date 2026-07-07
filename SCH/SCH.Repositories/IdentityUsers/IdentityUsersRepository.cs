@@ -8,7 +8,7 @@ namespace SCH.Repositories.IdentityUsers
     /// <summary>
     /// Repository implementation for IdentityUsers entity
     /// </summary>
-    internal class IdentityUsersRepository : IIdentityUsersRepository
+    public class IdentityUsersRepository : IIdentityUsersRepository
     {
         private readonly IdentityContext _context;
 

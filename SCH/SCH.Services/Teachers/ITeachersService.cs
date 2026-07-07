@@ -2,7 +2,7 @@ namespace SCH.Services.Teachers
 {
     using SCH.Models.Teachers.ClientDtos;
 
-    public interface ITeachersService: IService
+    public interface ITeachersService
     {
         Task<List<TeacherDto>> GetTeachersAsync();
 

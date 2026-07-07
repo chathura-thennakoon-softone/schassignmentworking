@@ -5,7 +5,7 @@ namespace SCH.Services.IdentityUsers
     using SCH.Repositories.IdentityUsers;
 
 
-    internal class IdentityUsersService: IIdentityUsersService
+    public class IdentityUsersService: IIdentityUsersService
     {
         private readonly IIdentityUsersRepository _identityUsersRepository;
 

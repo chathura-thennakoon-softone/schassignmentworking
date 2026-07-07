@@ -3,7 +3,7 @@
     using SCH.Models.StudentCourseMap.Entities;
     using System.Collections.Generic;
 
-    public interface IStudentCourseMapRepository: IRepository
+    public interface IStudentCourseMapRepository
     {
         Task<StudentCourseMap?> GetStudentCourseMapAsync(int studentId, int courseId);
 

@@ -10,7 +10,7 @@ namespace SCH.Repositories.UnitOfWork
     /// Unit of Work implementation for Identity context (identity schema)
     /// Handles audit tracking for identity entities using IIdentityAuditableEntity
     /// </summary>
-    internal class IdentityUnitOfWork : BaseUnitOfWork<IdentityContext>, IIdentityUnitOfWork
+    public class IdentityUnitOfWork : BaseUnitOfWork<IdentityContext>, IIdentityUnitOfWork
     {
         public IdentityUnitOfWork(IdentityContext context, IUserInfo? userInfo = null)
             : base(context, userInfo)

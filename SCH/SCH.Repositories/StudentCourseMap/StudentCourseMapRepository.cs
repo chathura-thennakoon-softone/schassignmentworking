@@ -6,7 +6,7 @@ namespace SCH.Repositories.StudentCourseMap
     using SCH.Repositories.DbContexts;
     using System.Collections.Generic;
 
-    internal class StudentCourseMapRepository : IStudentCourseMapRepository
+    public class StudentCourseMapRepository : IStudentCourseMapRepository
     {
         private readonly SCHContext context;
 

@@ -18,7 +18,7 @@ namespace SCH.Services.Students
     using SCH.Services.Auth;
     using SCH.Shared.Exceptions;
 
-    internal class StudentsService: IStudentsService
+    public class StudentsService: IStudentsService
     {
         private readonly ISCHUnitOfWork unitOfWork;
         private readonly IStudentsRepository studentsRepository;

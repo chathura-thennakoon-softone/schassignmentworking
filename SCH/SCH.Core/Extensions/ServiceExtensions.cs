@@ -1,8 +1,12 @@
 namespace SCH.Core.Extensions
 {
     using Microsoft.Extensions.DependencyInjection;
-    using SCH.Services;
-    using System.Reflection;
+    using SCH.Services.Auth;
+    using SCH.Services.Courses;
+    using SCH.Services.IdentityUsers;
+    using SCH.Services.Images;
+    using SCH.Services.Students;
+    using SCH.Services.Teachers;
 
     /// <summary>
     /// Extension methods for configuring application services
@@ -10,30 +14,18 @@ namespace SCH.Core.Extensions
     public static class ServiceExtensions
     {
         /// <summary>
-        /// Automatically registers all service implementations from SCH.Services assembly
+        /// Registers all service implementations
         /// </summary>
         /// <param name="services">Service collection</param>
         public static void AddServices(this IServiceCollection services)
         {
-            Assembly assembly = Assembly.Load("SCH.Services");
-
-            Type superInterfaceType = typeof(IService);
-
-            IEnumerable<Type> types = assembly.GetTypes()
-                .Where(t => 
-                    superInterfaceType.IsAssignableFrom(t) 
-                    && !t.IsInterface 
-                    && !t.IsAbstract);
-
-            foreach (Type type in types)
-            {
-                Type parentInteface = type.GetInterfaces()
-                    .Single(i =>
-                        i.GetInterfaces()
-                        .Any(ip => ip == superInterfaceType));
-
-                services.AddScoped(parentInteface, type);
-            }
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<ICoursesService, CoursesService>();
+            services.AddScoped<IIdentityUsersService, IdentityUsersService>();
+            services.AddScoped<IImageService, ImageService>();
+            services.AddScoped<IStudentsService, StudentsService>();
+            services.AddScoped<ITeachersService, TeachersService>();
         }
     }
 }

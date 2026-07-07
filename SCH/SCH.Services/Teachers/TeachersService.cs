@@ -12,7 +12,7 @@ namespace SCH.Services.Teachers
     using SCH.Services.Auth;
     using SCH.Shared.Exceptions;
 
-    internal class TeachersService: ITeachersService
+    public class TeachersService: ITeachersService
     {
         private readonly ISCHUnitOfWork unitOfWork;
         private readonly ITeachersRepository teachersRepository;

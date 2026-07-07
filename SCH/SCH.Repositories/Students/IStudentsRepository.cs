@@ -4,7 +4,7 @@ namespace SCH.Repositories.Students
     using SCH.Models.Students.ClientDtos;
     using SCH.Models.Students.Entities;
 
-    public interface IStudentsRepository: IRepository
+    public interface IStudentsRepository
     {
         Task<List<Student>> GetStudentsAsync(bool? isActive);
 

@@ -4,7 +4,7 @@
     using SCH.Models.StudentCourseMap.ClientDtos;
     using SCH.Models.Students.ClientDtos;
 
-    public interface IStudentsService: IService
+    public interface IStudentsService
     {
         Task<List<StudentDto>> GetStudentsAsync(bool? isActive);
 

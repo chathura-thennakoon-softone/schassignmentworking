@@ -7,7 +7,7 @@ namespace SCH.Shared.HttpContext
     /// Provides access to current user information from HttpContext
     /// Supports both dependency injection (via interface) and static access
     /// </summary>
-    internal class UserInfo : IUserInfo
+    public class UserInfo : IUserInfo
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 

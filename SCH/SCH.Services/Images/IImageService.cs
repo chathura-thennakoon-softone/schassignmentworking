@@ -2,7 +2,7 @@
 using SCH.Models.Image;
 namespace SCH.Services.Images
 {
-    public interface IImageService : IService
+    public interface IImageService
     {
         ImageFileDto GetStudentProfile(string imageName);
 

@@ -2,7 +2,7 @@ namespace SCH.Repositories.Teachers
 {
     using SCH.Models.Teachers.Entities;
 
-    public interface ITeachersRepository: IRepository
+    public interface ITeachersRepository
     {
         Task<List<Teacher>> GetTeachersAsync();
 

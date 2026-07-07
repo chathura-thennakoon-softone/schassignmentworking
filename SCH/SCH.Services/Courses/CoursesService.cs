@@ -8,7 +8,7 @@ namespace SCH.Services.Courses
     using SCH.Repositories.UnitOfWork;
     using SCH.Shared.Exceptions;
 
-    internal class CoursesService: ICoursesService
+    public class CoursesService: ICoursesService
     {
         private readonly ISCHUnitOfWork unitOfWork;
         private readonly ICoursesRepository coursesRepository;

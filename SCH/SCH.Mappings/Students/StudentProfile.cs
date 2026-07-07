@@ -9,7 +9,7 @@ namespace SCH.Mappings.Students
     using SCH.Models.Users.ClientDtos;
     using SCH.Models.Users.Entities;
 
-    public class StudentProfile : Profile, IProfile
+    public class StudentProfile : Profile
     {
         public StudentProfile()
         {

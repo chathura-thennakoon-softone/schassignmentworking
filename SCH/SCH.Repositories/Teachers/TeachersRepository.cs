@@ -5,7 +5,7 @@ namespace SCH.Repositories.Teachers
     using SCH.Repositories.Common;
     using SCH.Repositories.DbContexts;
 
-    internal class TeachersRepository : BaseRepository<Teacher, SCHContext>, ITeachersRepository
+    public class TeachersRepository : BaseRepository<Teacher, SCHContext>, ITeachersRepository
     {
         public TeachersRepository(SCHContext context) : base(context)
         {

@@ -5,7 +5,7 @@ namespace SCH.Repositories.Users
     /// <summary>
     /// Repository interface for User entity (domain user table)
     /// </summary>
-    public interface IUserRepository : IRepository
+    public interface IUserRepository
     {
         /// <summary>
         /// Gets a user by their ID (same as AspNetUsers.Id)

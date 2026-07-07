@@ -3,7 +3,7 @@ namespace SCH.Shared.HttpContext
     /// <summary>
     /// Interface for accessing current user information from HttpContext
     /// </summary>
-    public interface IUserInfo : IHttpContextService
+    public interface IUserInfo
     {
         /// <summary>
         /// Gets the current authenticated user's ID from JWT claims

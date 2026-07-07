@@ -10,7 +10,7 @@ namespace SCH.Repositories.UnitOfWork
     /// Unit of Work implementation for SCH context (dbo schema)
     /// Handles audit tracking for domain entities using IAuditableEntity
     /// </summary>
-    internal class SCHUnitOfWork : BaseUnitOfWork<SCHContext>, ISCHUnitOfWork
+    public class SCHUnitOfWork : BaseUnitOfWork<SCHContext>, ISCHUnitOfWork
     {
         public SCHUnitOfWork(SCHContext context, IUserInfo? userInfo = null)
             : base(context, userInfo)

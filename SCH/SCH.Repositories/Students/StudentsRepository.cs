@@ -10,7 +10,7 @@ namespace SCH.Repositories.Students
     using SCH.Repositories.Common;
     using SCH.Repositories.DbContexts;
 
-    internal class StudentsRepository : BaseRepository<Student, SCHContext>, IStudentsRepository
+    public class StudentsRepository : BaseRepository<Student, SCHContext>, IStudentsRepository
     {
         private readonly IMapper mapper;
 
