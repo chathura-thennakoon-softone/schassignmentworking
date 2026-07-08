@@ -3,6 +3,7 @@ namespace SCH.Core.Extensions
     using Microsoft.Extensions.DependencyInjection;
     using SCH.Services.Auth;
     using SCH.Services.Courses;
+    using SCH.Services.Dashboard;
     using SCH.Services.IdentityUsers;
     using SCH.Services.Images;
     using SCH.Services.Students;
@@ -22,6 +23,7 @@ namespace SCH.Core.Extensions
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ICoursesService, CoursesService>();
+            services.AddScoped<IDashboardService, DashboardService>();
             services.AddScoped<IIdentityUsersService, IdentityUsersService>();
             services.AddScoped<IImageService, ImageService>();
             services.AddScoped<IStudentsService, StudentsService>();
