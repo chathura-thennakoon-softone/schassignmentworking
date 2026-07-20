@@ -17,6 +17,7 @@ import { IdentityUserApi } from '../../../../../sch/services/identity-user-api';
 import { UserLookup } from '../../../../../sch/interfaces/user-lookup';
 import { Observable, forkJoin, of } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
+import { EditBase } from '../../../../../directives/edit-base.directive';
 
 
 @Component({
@@ -25,7 +26,7 @@ import { catchError, finalize, tap } from 'rxjs/operators';
   templateUrl: './teacher-detail-page.html',
   styleUrl: './teacher-detail-page.scss'
 })
-export class TeacherDetailPage implements OnInit, HasUnsavedChanges {
+export class TeacherDetailPage extends EditBase implements OnInit {
   protected readonly auth = inject(Auth);
   protected readonly teacherId = signal(0);
   protected readonly teacher = signal<Teacher | null>(null);
@@ -44,6 +45,7 @@ export class TeacherDetailPage implements OnInit, HasUnsavedChanges {
     private readonly identityUserApi: IdentityUserApi,
     private readonly notification: Notification
   ) {
+    super();
     this.teacherForm = this.fb.group({
       id: [0],
       name: ['', [Validators.required, Validators.minLength(2)]],
