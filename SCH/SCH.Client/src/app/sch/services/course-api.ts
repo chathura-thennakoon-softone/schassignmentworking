@@ -31,7 +31,20 @@ export class CourseApi {
   }
 
   public updateCourse(course: Course): Observable<void> {
-    return this.http.patch<void>(
+
+    // return this.http.patch<void>(
+    //   `${this.apiUrl}/courses/${course.id}`,
+    //   course
+    // );
+
+    /*
+      6. IQ Issue | Integrate | Medium
+      Wrong HTTP method
+    */
+
+
+
+    return this.http.put<void>(
       `${this.apiUrl}/courses/${course.id}`,
       course
     );

@@ -17,6 +17,17 @@ namespace SCH.Core.Extensions
             services.AddHttpContextAccessor();
             services.AddSingleton<IUserInfo, UserInfo>();
             services.AddSingleton<IRouteInfo, RouteInfo>();
+
+            /* 
+             13 IQ Issue | Runtime | Critical
+             Should be singleton
+
+            services.AddScoped<IUserInfo, UserInfo>();
+            services.AddScoped<IRouteInfo, RouteInfo>();
+             
+             */
+
+
         }
     }
 }

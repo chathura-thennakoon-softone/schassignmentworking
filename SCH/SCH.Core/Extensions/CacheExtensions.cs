@@ -8,7 +8,16 @@ namespace SCH.Core.Extensions
         public static IServiceCollection AddCacheServices(this IServiceCollection services)
         {
             services.AddMemoryCache();
+
+            /*
+             14. IQ Issue | Runtime | Critical
+             Register CacheService as Singleton
+             
+             
+             */
             services.AddSingleton<ICacheService, CacheService>();
+
+
             return services;
         }
     }

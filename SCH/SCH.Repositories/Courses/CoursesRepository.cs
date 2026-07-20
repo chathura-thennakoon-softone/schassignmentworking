@@ -31,8 +31,19 @@ namespace SCH.Repositories.Courses
             List<Course> courses = await Context
                 .Course
                 .AsNoTracking()
-                .Where(c => coursesIds.Contains(c.Id))
+              //  .Where(c => coursesIds.Contains(c.Id))
                 .ToListAsync();
+
+            /* 4. IQ Issue | Code Review | Medium
+                where and order after ToListAsync()
+             
+             */
+
+            courses = courses
+                .Where(c => coursesIds.Contains(c.Id))
+                .OrderBy(c => coursesIds.IndexOf(c.Id))
+                .ToList();
+
 
             return courses;
         }
@@ -59,9 +70,13 @@ namespace SCH.Repositories.Courses
 
         public async Task DeleteCourseAsync(int id)
         {
+            /* 5. IQ Issue | Code Review | Medium
+             * Possible Not Found Exception
+             */
+
 
             Course? courseEntity = await Context
-                .Course.SingleOrDefaultAsync(s => s.Id == id);
+                .Course.SingleAsync(s => s.Id == id);
 
             if (courseEntity != null)
             {

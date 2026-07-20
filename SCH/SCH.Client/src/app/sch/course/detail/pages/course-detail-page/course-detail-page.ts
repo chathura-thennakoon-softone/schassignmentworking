@@ -20,13 +20,28 @@ import { EditBase } from '../../../../../directives/edit-base.directive';
   templateUrl: './course-detail-page.html',
   styleUrl: './course-detail-page.scss'
 })
-export class CourseDetailPage extends EditBase implements OnInit {
+
+//export class CourseDetailPage extends EditBase implements OnInit {
+
+/*
+  7. IQ Issue | Missing | Low
+  No unsaved changes validation
+
+*/
+
+export class CourseDetailPage implements OnInit {
   protected readonly courseId = signal(0);
 
   protected readonly course = signal<Course | null>(null);
 
   protected readonly isCourseLoading = signal(false);
-  protected readonly isCourseSaving = signal(false);
+
+  /* 11. IQ Issue | Invaild Type | Medium
+    should be signal<boolean> instead of boolean
+    protected readonly isCourseSaving = signal(false);
+
+  */
+  protected isCourseSaving = false;
 
   protected courseForm: FormGroup;
 
@@ -37,10 +52,15 @@ export class CourseDetailPage extends EditBase implements OnInit {
     private readonly courseApi: CourseApi,
     private readonly notification: Notification
   ) {
-    super();
+    // super();
+
+    /* 9. IQ Issue | Validation | Medium
+    */
+
     this.courseForm = this.fb.group({
       id: [0],
-      name: ['', [Validators.required, Validators.minLength(2)]],
+      //name: ['', [Validators.required, Validators.minLength(2)]],
+      name: ['']
     });
   }
 
@@ -121,7 +141,9 @@ export class CourseDetailPage extends EditBase implements OnInit {
     };
 
     if (course.id > 0) {
-      this.isCourseSaving.set(true);
+      // this.isCourseSaving.set(true);
+
+      this.isCourseSaving = true;
       this.courseApi
         .updateCourse(course)
         .subscribe({
@@ -135,10 +157,13 @@ export class CourseDetailPage extends EditBase implements OnInit {
           },
         })
         .add(() => {
-          this.isCourseSaving.set(false);
+          // this.isCourseSaving.set(false);
+          this.isCourseSaving = false;
         });
     } else {
-      this.isCourseSaving.set(true);
+
+      // this.isCourseSaving.set(true);
+      this.isCourseSaving = true;
       this.courseApi
         .insertCourse(course)
         .subscribe({
@@ -152,7 +177,8 @@ export class CourseDetailPage extends EditBase implements OnInit {
           },
         })
         .add(() => {
-          this.isCourseSaving.set(false);
+          // this.isCourseSaving.set(false);
+          this.isCourseSaving = false;
         });
     }
   }

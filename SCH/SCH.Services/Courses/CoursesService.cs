@@ -27,6 +27,14 @@ namespace SCH.Services.Courses
                 .GetCoursesAsync();
 
             return courses.Select(MapToDto).ToList();
+
+            /*
+             1. IQ Issue | Compiler Error | Critial
+
+            
+            return courses;
+
+            */
         }
 
         public async Task<CourseDto?> GetCourseAsync(int id)
@@ -56,10 +64,14 @@ namespace SCH.Services.Courses
             Course? courseEntity = await coursesRepository
                 .GetCourseAsync(course.Id);
 
-            if (courseEntity == null)
-            {
-                throw SCHDomainException.NotFound();
-            }
+            /* 2. IQ Issue | Code Review | Medium
+             * Possible Null point exception
+             */
+
+            //if (courseEntity == null)
+            //{
+            //    throw SCHDomainException.NotFound();
+            //}
 
             // Map DTO to entity
             courseEntity.Name = course.Name;
@@ -68,7 +80,14 @@ namespace SCH.Services.Courses
 
             // Repository handles concurrency check
             coursesRepository.UpdateAsync(courseEntity);
-            await unitOfWork.SaveChangesAsync();
+            //await unitOfWork.SaveChangesAsync();
+
+            /* 3. IQ Issue | Code Review | Low
+             * no await
+            */
+             unitOfWork.SaveChangesAsync();
+             
+
         }
 
         public async Task DeleteCourseAsync(int id)

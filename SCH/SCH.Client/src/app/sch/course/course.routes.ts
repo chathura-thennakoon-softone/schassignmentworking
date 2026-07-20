@@ -23,6 +23,11 @@ export const courseRoutes: Routes = [
       import('./detail/pages/course-detail-page/course-detail-page').then(
         (m) => m.CourseDetailPage
       ),
-    canDeactivate: [unsavedChangesGuard],
+
+    /* 8. IQ Issue | Missing | Low 
+        No unsaved changes validation
+    */
+
+    //canDeactivate: [unsavedChangesGuard],
   },
 ];

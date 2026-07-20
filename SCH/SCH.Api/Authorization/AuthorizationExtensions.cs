@@ -83,8 +83,17 @@ namespace SCH.API.Authorization
 
                 // ---- Cache policies ----
 
+                /*
+                 15. IQ Issue | Missing | Medium
+
+                Add 
                 options.AddPolicy(Policy.ClearCache, policy =>
                     policy.RequireRole(Role.Admin));
+                */
+
+
+                //options.AddPolicy(Policy.ClearCache, policy =>
+                //    policy.RequireRole(Role.Admin));
 
 
             });

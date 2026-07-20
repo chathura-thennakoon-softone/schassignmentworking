@@ -161,6 +161,11 @@ export class StudentDetailPage extends EditBase implements OnInit {
         date = formatDate(student.startDate, 'yyyy-MM-dd', 'en');
       }
 
+/* 10. IQ Issue | Missing | Medium
+      no userId set in form with setValue
+*/
+
+
       this.studentForm.setValue({
         id: student.id,
         firstName: student.firstName,
@@ -169,7 +174,7 @@ export class StudentDetailPage extends EditBase implements OnInit {
         phoneNumber: student.phoneNumber,
         ssn: student.ssn,
         startDate: date,
-        userId: student.userId ?? null,
+       // userId: student.userId ?? null,
       });
     }
   }
