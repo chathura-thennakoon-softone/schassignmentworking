@@ -1,17 +1,16 @@
 namespace SCH.Services.Teachers
 {
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using SCH.Models.Auth.Constants;
     using SCH.Models.Auth.Entities;
     using SCH.Models.Teachers.ClientDtos;
     using SCH.Models.Teachers.Entities;
     using SCH.Models.Users.ClientDtos;
-    using SCH.Models.Users.Entities;
     using SCH.Repositories.Teachers;
     using SCH.Repositories.UnitOfWork;
     using SCH.Services.Auth;
     using SCH.Shared.Exceptions;
+    using SCH.Shared.HttpContext;
 
     public class TeachersService: ITeachersService
     {
@@ -19,20 +18,20 @@ namespace SCH.Services.Teachers
         private readonly ITeachersRepository teachersRepository;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IAuthService authService;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IUserInfo userInfo;
 
         public TeachersService(
             ISCHUnitOfWork unitOfWork,
             ITeachersRepository teachersRepository,
             UserManager<ApplicationUser> userManager,
             IAuthService authService,
-            IHttpContextAccessor httpContextAccessor)
+            IUserInfo userInfo)
         {
             this.unitOfWork = unitOfWork;
             this.teachersRepository = teachersRepository;
             this.userManager = userManager;
             this.authService = authService;
-            this._httpContextAccessor = httpContextAccessor;
+            this.userInfo = userInfo;
         }
 
         public async Task<List<TeacherDto>> GetTeachersAsync()
@@ -78,7 +77,7 @@ namespace SCH.Services.Teachers
                 throw SCHDomainException.NotFound();
             }
 
-            bool isAdmin = _httpContextAccessor.HttpContext?.User.IsInRole(Role.Admin) == true;
+            bool isAdmin = this.userInfo.IsInRole(Role.Admin);
             int? oldUserId = teacherEntity.UserId;
             int? newUserId = teacher.UserId;
 

@@ -15,7 +15,8 @@ namespace SCH.Core.Extensions
         public static void AddHttpContextServices(this IServiceCollection services)
         {
             services.AddHttpContextAccessor();
-            services.AddScoped<IUserInfo, UserInfo>();
+            services.AddSingleton<IUserInfo, UserInfo>();
+            services.AddSingleton<IRouteInfo, RouteInfo>();
         }
     }
 }
