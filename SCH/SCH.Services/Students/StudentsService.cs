@@ -1,22 +1,22 @@
 namespace SCH.Services.Students
 {
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
+    using SCH.Shared.HttpContext;
     using SCH.Models.Auth.Constants;
     using SCH.Models.Auth.Entities;
+    using SCH.Models.Common.GridEntities;
+    using SCH.Models.Courses.Entities;
     using SCH.Models.StudentCourseMap.ClientDtos;
     using SCH.Models.StudentCourseMap.Entities;
     using SCH.Models.Students.ClientDtos;
     using SCH.Models.Students.Entities;
-    using SCH.Models.Courses.Entities;
-    using SCH.Models.Users.ClientDtos;
     using SCH.Repositories.Courses;
     using SCH.Repositories.StudentCourseMap;
     using SCH.Repositories.Students;
     using SCH.Repositories.UnitOfWork;
     using SCH.Services.Auth;
     using SCH.Shared.Exceptions;
-    using SCH.Shared.HttpContext;
+    using SCH.Models.Users.ClientDtos;
 
     public class StudentsService: IStudentsService
     {
@@ -36,8 +36,8 @@ namespace SCH.Services.Students
             IStudentCourseMapRepository studentCourseMapRepository,
             UserManager<ApplicationUser> userManager,
             IAuthService authService,
-            IUserInfo userInfo) 
-        { 
+            IUserInfo userInfo)
+        {
             this.unitOfWork = unitOfWork;
             this.studentsRepository = studentsRepository;
             this.coursesRepository = coursesRepository;
@@ -248,6 +248,24 @@ namespace SCH.Services.Students
                 .DeleteStudentCourseMapAsync(id, courseId);
 
             await unitOfWork.SaveChangesAsync();
+        }
+
+        public async Task<PagedResult<StudentDto>> GetStudentGridAsync(StudentGridRequest request)
+        {
+            PagedResult<Student> result = await studentsRepository
+                .GetStudentGridAsync(request);
+
+            List<StudentDto> studentDtos = result.Items
+                .Select(MapStudentToDto)
+                .ToList();
+
+            return new PagedResult<StudentDto>
+            {
+                Items = studentDtos,
+                TotalCount = result.TotalCount,
+                PageNumber = result.PageNumber,
+                PageSize = result.PageSize,
+            };
         }
 
         private async Task ValidateCourses(StudentDto student)

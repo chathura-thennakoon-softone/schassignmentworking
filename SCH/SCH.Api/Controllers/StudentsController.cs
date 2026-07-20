@@ -9,6 +9,7 @@ namespace SCH.API.Controllers
     using SCH.Services.Students;
     using SCH.Shared.Exceptions;
     using System;
+    using SCH.Models.Common.GridEntities;
     using SCH.Models.Auth.Constants;
 
     [Route("api/[controller]")]
@@ -18,9 +19,20 @@ namespace SCH.API.Controllers
     {
         private readonly IStudentsService studentsService;
 
-        public StudentsController(IStudentsService studentsService) 
+        public StudentsController(IStudentsService studentsService)
         {
-            this.studentsService = studentsService;     
+            this.studentsService = studentsService;
+        }
+
+        // GET: api/students/grid
+        [HttpGet("grid")]
+        [Authorize(Policy = Policy.ViewStudents)]
+        public async Task<IActionResult> GetStudentGridAsync(
+            [FromQuery] StudentGridRequest request)
+        {
+            PagedResult<StudentDto> result = await studentsService
+                .GetStudentGridAsync(request);
+            return Ok(result);
         }
 
         // GET: api/<StudentsController>
@@ -127,8 +139,8 @@ namespace SCH.API.Controllers
         [HttpPut("{id}/courses/{courseId}")]
         [Authorize(Policy = Policy.EditStudents)]
         public async Task<IActionResult> PutCourseAsync(
-            int id, 
-            int courseId, 
+            int id,
+            int courseId,
             [FromBody] StudentCourseMapDto studentCourseMap)
         {
             if (id < 1)
@@ -141,7 +153,7 @@ namespace SCH.API.Controllers
                 throw SCHDomainException.BadRequest("Course Id should grater than 0");
             }
 
-            if (studentCourseMap == null) 
+            if (studentCourseMap == null)
             {
                 throw SCHDomainException.BadRequest("Student course map is not set");
             }
