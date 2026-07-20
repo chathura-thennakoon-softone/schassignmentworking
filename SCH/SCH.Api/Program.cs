@@ -15,6 +15,9 @@ builder.Services.AddAllowedOrigins(
 // Add HttpContext services (IHttpContextAccessor, IUserInfo, etc.)
 builder.Services.AddHttpContextServices();
 
+// Register IMemoryCache and ICacheService
+builder.Services.AddCacheServices();
+
 // Add services to the container.
 
 builder.Services.ConfigureControllersWithFilters(); // Includes ModelValidationFilter
