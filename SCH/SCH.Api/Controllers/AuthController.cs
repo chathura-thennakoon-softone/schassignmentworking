@@ -173,7 +173,6 @@ namespace SCH.API.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> CheckUsername(string username)
         {
-            await Task.Delay(2000);
             bool isAvailable = await _authService.IsUsernameAvailableAsync(username);
             return Ok(new { isAvailable });
         }
@@ -187,7 +186,6 @@ namespace SCH.API.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> CheckEmail(string email)
         {
-            await Task.Delay(2000);
             bool isAvailable = await _authService.IsEmailAvailableAsync(email);
             return Ok(new { isAvailable });
         }

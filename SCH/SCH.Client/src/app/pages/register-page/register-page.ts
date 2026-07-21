@@ -77,6 +77,13 @@ export class RegisterPage implements OnDestroy {
   );
 
   constructor() {
+
+    /*
+    23. IQ Issue | Missing | Medium
+    add AsyncValidators
+    */
+
+
     this.registerForm = this.formBuilder.nonNullable.group(
       {
         username: [
@@ -86,12 +93,12 @@ export class RegisterPage implements OnDestroy {
             Validators.minLength(3),
             Validators.maxLength(50),
           ],
-          [this.usernameAvailableValidator()],
+          // [this.usernameAvailableValidator()],
         ],
         email: [
           '',
           [Validators.required, Validators.email],
-          [this.emailAvailableValidator()],
+          // [this.emailAvailableValidator()],
         ],
         password: [
           '',
