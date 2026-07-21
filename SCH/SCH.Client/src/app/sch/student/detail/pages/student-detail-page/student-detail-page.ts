@@ -108,7 +108,14 @@ export class StudentDetailPage extends EditBase implements OnInit {
     });
 
     this.coursesArray.valueChanges.subscribe(() => {
-      this.resetCourseNames();
+
+/*
+  24. IQ Issue | Missing | Medium
+      not setting courseName for new rows
+*/
+
+
+      // this.resetCourseNames();
     });
   }
 
@@ -199,6 +206,7 @@ export class StudentDetailPage extends EditBase implements OnInit {
 
 /* 10. IQ Issue | Missing | Medium
       no userId set in form with setValue
+
 */
 
       const courses = (student.courses ?? []).map((c) => ({
@@ -267,6 +275,27 @@ export class StudentDetailPage extends EditBase implements OnInit {
   }
 
   private saveStudent(image: string | null): void {
+    
+
+/*
+
+25. IQ Issue | Missing | Medium
+      removing courses when saving
+      courses: this.coursesArray.controls
+        .filter((g) => g.value.courseId !== null && g.value.courseId !== undefined)
+        .map((g) => ({
+          studentId: this.studentForm.value.id!,
+          courseId: g.value.courseId!,
+          enrollmentDate: g.value.enrollmentDate!,
+          studentFirstName: null,
+          studentLastName: null,
+          courseName: null,
+        })),
+      */
+
+
+
+
     const student: Student = {
       id: this.studentForm.value.id ?? 0,
       firstName: this.studentForm.value.firstName!,
@@ -279,16 +308,7 @@ export class StudentDetailPage extends EditBase implements OnInit {
       isActive: true,
       userId: this.auth.isAdmin() ? (this.studentForm.value.userId ?? null) : undefined,
       rowVersion: this.student()?.rowVersion, // Include rowVersion for concurrency check
-      courses: this.coursesArray.controls
-        .filter((g) => g.value.courseId !== null && g.value.courseId !== undefined)
-        .map((g) => ({
-          studentId: this.studentForm.value.id!,
-          courseId: g.value.courseId!,
-          enrollmentDate: g.value.enrollmentDate!,
-          studentFirstName: null,
-          studentLastName: null,
-          courseName: null,
-        })),
+      courses: [],
     };
 
     if (student.id > 0) {
