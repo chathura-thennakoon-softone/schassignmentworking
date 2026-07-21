@@ -4,8 +4,15 @@
   [disabled]="gridDataLoading() || isDeleting()"
 >Add</button>
 
+<!--
+20. IQ Issue | Missing | Medium
+*hasPolicy="Policy.DeleteStudents"
+
+-->
+
+
 <button
-  *hasPolicy="Policy.DeleteStudents"
+  
   (click)="onRemoveShown()"
   [disabled]="gridDataLoading() || isDeleting() || rowData().length === 0"
 >Remove Shown</button>

@@ -1,4 +1,20 @@
-﻿CREATE PROCEDURE [dbo].[GetStudentGrid]
+﻿/*
+17. IQ Issue | Missing | Medium
+
+Not showing records until Active is selected
+
+18. IQ Issue | Missing | Medium
+
+Duplicate the records
+
+*/
+
+
+/*
+   History:
+   join course table to get student course
+*/
+CREATE PROCEDURE [dbo].[GetStudentGrid]
     @PageNumber          INT,
     @PageSize            INT,
     @SortBy              NVARCHAR(100)  = NULL,
@@ -57,8 +73,11 @@ BEGIN
         s.ModifiedBy,
         s.ModifiedDate,
         s.RowVersion,
+        c.Name AS CourseName,
         COUNT(*) OVER() AS TotalCount
     FROM [dbo].[Student] s
+    LEFT JOIN [dbo].[StudentCourseMap] scm ON scm.StudentId = s.Id
+    LEFT JOIN [dbo].[Course] c ON c.Id = scm.CourseId
     WHERE
         -- FirstName filter
         (
@@ -502,7 +521,8 @@ BEGIN
             )
         )
         -- IsActive filter
-        AND (@IsActive IS NULL OR s.IsActive = @IsActive)
+        -- AND (@IsActive IS NULL OR s.IsActive = @IsActive)
+        AND (s.IsActive = @IsActive)
     ORDER BY
         -- firstName
         CASE WHEN @SortBy = 'firstName'   AND LOWER(@SortByOperator) != 'desc' THEN s.FirstName   END ASC,

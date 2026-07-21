@@ -62,6 +62,13 @@ export const schRoutes: Routes = [
     ],
     children: courseRoutes
   },
+/*
+22. IQ Issue | Run Time | Medium
+
+provide IdentityUserApi 
+
+*/
+
   {
     path: 'teacher',
     providers: [
@@ -73,10 +80,10 @@ export const schRoutes: Routes = [
         provide: ImageApi,
         useClass: ImageApi
       },
-      {
-        provide: IdentityUserApi,
-        useClass: IdentityUserApi
-      }
+      // {
+      //   provide: IdentityUserApi,
+      //   useClass: IdentityUserApi
+      // }
     ],
     children: teacherRoutes
   }

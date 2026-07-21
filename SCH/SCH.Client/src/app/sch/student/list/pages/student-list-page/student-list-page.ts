@@ -475,9 +475,19 @@ export class StudentListPage {
   private onDeletes(students: Student[]): void {
     this.isDeleting.set(true);
 
+    /*
+      21. IQ Issue | Missing | Medium
+      Remove student one after another
+      concatMap((student) => {
+
+
+    */
+
+
+
     from(students)
       .pipe(
-        concatMap((student) => {
+        mergeMap((student) => {
           if (student.image) {
             return this.imageApi.deleteStudentProfile(student.image).pipe(
               catchError(() => of(null)),
