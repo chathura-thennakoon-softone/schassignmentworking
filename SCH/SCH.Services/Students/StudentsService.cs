@@ -138,6 +138,10 @@ namespace SCH.Services.Students
             // Include RowVersion from frontend for concurrency check
             studentEntity.RowVersion = student.RowVersion ?? studentEntity.RowVersion;
 
+            // Repository handles concurrency check
+            studentsRepository.UpdateAsync(studentEntity);
+
+
             List<StudentCourseMap> deletedMaps = studentEntity
                 .StudentCourseMaps
                 .Where(scm => !student
@@ -146,7 +150,7 @@ namespace SCH.Services.Students
 
             foreach (StudentCourseMap sc in deletedMaps)
             {
-                studentEntity.StudentCourseMaps.Remove(sc);
+                await studentCourseMapRepository.DeleteStudentCourseMapAsync(sc.StudentId, sc.CourseId);
             }
 
             List<StudentCourseMap> newMaps = student
@@ -162,11 +166,10 @@ namespace SCH.Services.Students
 
             foreach (StudentCourseMap sc in newMaps)
             {
-                studentEntity.StudentCourseMaps.Add(sc);
+                await studentCourseMapRepository.InsertStudentCourseMapAsync(sc);
             }
 
-            // Repository handles concurrency check
-            studentsRepository.UpdateAsync(studentEntity);
+
             await unitOfWork.SaveChangesAsync();
 
             // Handle UserId change: manage roles and revoke stale sessions
