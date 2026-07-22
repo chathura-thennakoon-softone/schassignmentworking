@@ -19,7 +19,7 @@ namespace SCH.Core.Extensions
             services.AddSingleton<IRouteInfo, RouteInfo>();
 
             /* 
-             13 IQ Issue | Runtime | Critical
+             6. IQ Issue | Runtime | Critical
              Should be singleton
 
             services.AddScoped<IUserInfo, UserInfo>();

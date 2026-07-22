@@ -63,7 +63,7 @@ export const schRoutes: Routes = [
     children: courseRoutes
   },
 /*
-22. IQ Issue | Run Time | Medium
+16. IQ Issue | Run Time | Medium
 
 provide IdentityUserApi 
 

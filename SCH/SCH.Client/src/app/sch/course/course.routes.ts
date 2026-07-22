@@ -24,7 +24,7 @@ export const courseRoutes: Routes = [
         (m) => m.CourseDetailPage
       ),
 
-    /* 8. IQ Issue | Missing | Low 
+    /* 18. IQ Issue | Missing | Low 
         No unsaved changes validation
     */
 

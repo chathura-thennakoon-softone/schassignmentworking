@@ -24,7 +24,7 @@ import { EditBase } from '../../../../../directives/edit-base.directive';
 //export class CourseDetailPage extends EditBase implements OnInit {
 
 /*
-  7. IQ Issue | Missing | Low
+  17. IQ Issue | Missing | Low
   No unsaved changes validation
 
 */
@@ -54,7 +54,7 @@ export class CourseDetailPage implements OnInit {
   ) {
     // super();
 
-    /* 9. IQ Issue | Validation | Medium
+    /* 10. IQ Issue | Validation | Medium
     */
 
     this.courseForm = this.fb.group({

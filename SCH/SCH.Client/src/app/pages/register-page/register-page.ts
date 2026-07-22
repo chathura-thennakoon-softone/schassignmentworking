@@ -79,7 +79,7 @@ export class RegisterPage implements OnDestroy {
   constructor() {
 
     /*
-    23. IQ Issue | Missing | Medium
+    21. IQ Issue | Missing | Medium
     add AsyncValidators
     */
 

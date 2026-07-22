@@ -110,7 +110,7 @@ export class StudentDetailPage extends EditBase implements OnInit {
     this.coursesArray.valueChanges.subscribe(() => {
 
 /*
-  24. IQ Issue | Missing | Medium
+  20. IQ Issue | Missing | Medium
       not setting courseName for new rows
 */
 
@@ -204,7 +204,7 @@ export class StudentDetailPage extends EditBase implements OnInit {
         date = formatDate(student.startDate, 'yyyy-MM-dd', 'en');
       }
 
-/* 10. IQ Issue | Missing | Medium
+/* 7. IQ Issue | Missing | Medium
       no userId set in form with setValue
 
 */
@@ -279,7 +279,7 @@ export class StudentDetailPage extends EditBase implements OnInit {
 
 /*
 
-25. IQ Issue | Missing | Medium
+19. IQ Issue | Missing | Medium
       removing courses when saving
       courses: this.coursesArray.controls
         .filter((g) => g.value.courseId !== null && g.value.courseId !== undefined)

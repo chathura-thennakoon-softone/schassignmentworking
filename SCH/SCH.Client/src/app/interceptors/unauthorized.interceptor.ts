@@ -13,7 +13,7 @@ export const unauthorizedInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
 
   /*
-    19. IQ Issue | Missing | Medium
+    23. IQ Issue | Missing | Medium
     TODO: implement redirect to login page for 401 Unauthorized errors and redirect to unauthorized page for 403 Forbidden errors.
 
   return next(req).pipe(

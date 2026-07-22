@@ -1,9 +1,9 @@
 ﻿/*
-17. IQ Issue | Missing | Medium
+12. IQ Issue | Missing | Medium
 
 Not showing records until Active is selected
 
-18. IQ Issue | Missing | Medium
+13. IQ Issue | Missing | Medium
 
 Duplicate the records
 

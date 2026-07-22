@@ -476,7 +476,7 @@ export class StudentListPage {
     this.isDeleting.set(true);
 
     /*
-      21. IQ Issue | Missing | Medium
+      22. IQ Issue | Missing | Medium
       Remove student one after another
       concatMap((student) => {
 

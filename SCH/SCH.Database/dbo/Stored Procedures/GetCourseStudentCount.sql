@@ -4,7 +4,7 @@ BEGIN
     SET NOCOUNT ON;
 
     /*
-        16. IQ Issue | Missing | Low
+        25. IQ Issue | Missing | Low
 
     SELECT
         c.Id,

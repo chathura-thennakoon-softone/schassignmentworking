@@ -84,7 +84,7 @@ namespace SCH.API.Authorization
                 // ---- Cache policies ----
 
                 /*
-                 15. IQ Issue | Missing | Medium
+                 14. IQ Issue | Missing | Medium
 
                 Add 
                 options.AddPolicy(Policy.ClearCache, policy =>

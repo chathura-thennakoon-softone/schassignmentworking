@@ -38,7 +38,7 @@ export class CourseApi {
     // );
 
     /*
-      6. IQ Issue | Integrate | Medium
+      9. IQ Issue | Integrate | Medium
       Wrong HTTP method
     */
 

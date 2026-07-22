@@ -10,7 +10,7 @@ namespace SCH.Core.Extensions
             services.AddMemoryCache();
 
             /*
-             14. IQ Issue | Runtime | Critical
+             15. IQ Issue | Runtime | Critical
              Register CacheService as Singleton
              
              
